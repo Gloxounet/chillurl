@@ -6,7 +6,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const slug = req.query["slug"];
 
 	if (!slug || typeof slug !== "string") {
-		res.status(404).json({ message: "Please use that with a correct slug" });
+		res.statusCode = 404;
+
+		res.send(JSON.stringify({ message: "Please use this with a slug" }));
 
 		return;
 	}
@@ -20,7 +22,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	});
 
 	if (!data) {
-		res.status(404).json({ message: "Slug not found" });
+		res.statusCode = 404;
+
+		res.send(JSON.stringify({ message: "Slug not found in database" }));
 
 		return;
 	}
